@@ -4,7 +4,6 @@ namespace App;
 
 use App\Mail\BareMail;
 use App\Notifications\PasswordResetNotification;
-
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -61,5 +60,15 @@ class User extends Authenticatable
         return $user
             ? (bool)$this->followers->where('id', $user->id)->count()
             : false;
+    }
+
+    public function getCountFollowersAttribute(): int
+    {
+        return $this->followers->count();
+    }
+ 
+    public function getCountFollowingsAttribute(): int
+    {
+        return $this->followings->count();
     }
 }
