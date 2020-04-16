@@ -1,12 +1,10 @@
 <template>
   <div>
-    <!----------ここから追加---------->  
     <input
       type="hidden"
       name="tags"
       :value="tagsJson"
     >
-    <!----------ここまで追加---------->
     <vue-tags-input
       v-model="tag"
       :tags="tags"
