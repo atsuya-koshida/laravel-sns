@@ -3,14 +3,10 @@
 namespace App\Http\Controllers\Auth;
  
 use App\Http\Controllers\Controller;
-//==========ここから追加==========
 use App\User;
-//==========ここまで追加==========
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-//==========ここから追加==========
 use Illuminate\Http\Request;
-//==========ここまで追加==========
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
@@ -60,5 +56,11 @@ class LoginController extends Controller
             $this->guard()->login($user, true);
             return $this->sendLoginResponse($request);
         }
+
+        return redirect()->route('register.{provider}', [
+            'provider' => $provider,
+            'email' => $providerUser->getEmail(),
+            'token' => $providerUser->token,
+        ]);   
     }
 }
